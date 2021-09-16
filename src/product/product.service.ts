@@ -6,31 +6,31 @@ import { Product } from './product.model';
 export class ProductService {
   constructor(
     @InjectModel(Product)
-    private produtoModel: typeof Product,
+    private productModel: typeof Product,
   ) {}
 
   async getAll(): Promise<Product[]> {
-    return this.produtoModel.findAll();
+    return this.productModel.findAll();
   }
 
   async getOne(id: number): Promise<Product> {
-    return this.produtoModel.findByPk(id);
+    return this.productModel.findByPk(id);
   }
 
-  async create(produto: Product): Promise<Product> {
-    return this.produtoModel.create(produto);
+  async create(product: Product): Promise<Product> {
+    return this.productModel.create(product);
   }
 
-  async update(produto: Product): Promise<[number, Product[]]> {
-    return this.produtoModel.update(produto, {
+  async update(product: Product): Promise<[number, Product[]]> {
+    return this.productModel.update(product, {
       where: {
-        id: produto.id,
+        id: product.id,
       },
     });
   }
 
   async destroy(id: number) {
-    const produto: Product = await this.getOne(id);
-    produto.destroy();
+    const product: Product = await this.getOne(id);
+    product.destroy();
   }
 }

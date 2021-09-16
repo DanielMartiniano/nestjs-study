@@ -1,22 +1,20 @@
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { IsEmail, IsNotEmpty, IsNumber, isNumber, IsString } from 'class-validator';
 
 @Table
 export class Product extends Model<Product> {
-  @Column({
-    type: DataType.STRING(60),
-    allowNull: false,
-  })
-  codigo: string;
+  @IsNotEmpty()
+  @IsString()
+  @Column({type: DataType.STRING(60), allowNull: false })
+  sku: string;
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  nome: string;
+  @IsNotEmpty()
+  @IsString()
+  @Column({ type: DataType.STRING, allowNull: false })
+  name: string;
 
-  @Column({
-    type: DataType.DECIMAL(10, 2),
-    allowNull: false,
-  })
-  preco: number;
+  @IsNotEmpty()
+  @IsNumber()
+  @Column({ type: DataType.DECIMAL(10, 2), allowNull: false })
+  price: number;
 }

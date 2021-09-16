@@ -11,7 +11,7 @@ import {
 import { Product } from './product.model';
 import { ProductService } from './product.service';
 
-@Controller('produtos')
+@Controller('product')
 export class ProdutosController {
   constructor(private ProductService: ProductService) {}
 
@@ -27,13 +27,14 @@ export class ProdutosController {
 
   @Post()
   @HttpCode(204)
-  async create(@Body() produto: Product) {
-    return this.ProductService.create(produto);
+  async create(@Body() product: Product) {
+    return this.ProductService.create(product.get());
   }
 
   @Put()
-  async update(@Body() produto: Product): Promise<[number, Product[]]> {
-    return this.ProductService.update(produto);
+  async update(@Body() product: Product): Promise<[number, Product[]]> {
+    console.log(product)
+    return this.ProductService.update(product.get());
   }
 
   @Delete(':id')
