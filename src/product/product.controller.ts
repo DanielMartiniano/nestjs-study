@@ -3,7 +3,7 @@ import {
   Controller,
   Delete,
   Get,
-  HttpCode,
+  NotFoundException,
   Param,
   Post,
   Put,
@@ -17,12 +17,18 @@ export class ProdutosController {
 
   @Get()
   async getAll(): Promise<Product[]> {
-    return this.ProductService.getAll();
+    const products = await this.ProductService.getAll();
+    if(!products.length) throw new NotFoundException()
+    
+    return products;
   }
 
   @Get(':id')
   async getOne(@Param() params): Promise<Product> {
-    return this.ProductService.getOne(params.id);
+    const product = await this.ProductService.getOne(params.id);
+    if(!product) throw new NotFoundException()
+    
+    return product;
   }
 
   @Post()
