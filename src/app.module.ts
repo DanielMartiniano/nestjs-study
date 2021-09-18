@@ -2,6 +2,7 @@ import { ClassSerializerInterceptor, HttpException, Module } from '@nestjs/commo
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AllExceptionsFilter } from './commom/filters/exception.filter';
 import { ProdutoModule } from './product/product.module';
 
 const Interceptor = {
@@ -11,7 +12,7 @@ const Interceptor = {
 
 const Filter = {
   provide: APP_FILTER,
-  useClass: HttpException,
+  useClass: AllExceptionsFilter
 }
 
 @Module({
