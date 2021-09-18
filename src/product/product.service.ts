@@ -10,18 +10,20 @@ export class ProductService {
   ) {}
 
   async getAll(): Promise<Product[]> {
-    return this.productModel.findAll();
+    return this.productModel.findAll({ raw: true });
   }
 
   async getOne(id: number): Promise<Product> {
-    return this.productModel.findByPk(id);
+    return this.productModel.findByPk(id, { raw: true });
   }
 
   async create(product: Product): Promise<Product> {
-    return this.productModel.create(product);
+    return this.productModel.create(product.get()).then(res => res.get());
   }
 
   async update(product: Product): Promise<[number, Product[]]> {
+    product = product.get();
+    console.log(product)
     return this.productModel.update(product, {
       where: {
         id: product.id,

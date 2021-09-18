@@ -26,15 +26,13 @@ export class ProdutosController {
   }
 
   @Post()
-  @HttpCode(204)
-  async create(@Body() product: Product) {
-    return this.ProductService.create(product.get());
+  async create(@Body() product: Product): Promise<Product> {
+    return this.ProductService.create(product);
   }
 
   @Put()
   async update(@Body() product: Product): Promise<[number, Product[]]> {
-    console.log(product)
-    return this.ProductService.update(product.get());
+    return this.ProductService.update(product);
   }
 
   @Delete(':id')
