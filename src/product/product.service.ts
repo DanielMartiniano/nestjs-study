@@ -23,7 +23,6 @@ export class ProductService {
 
   async update(product: Product): Promise<[number, Product[]]> {
     product = product.get();
-    console.log(product)
     return this.productModel.update(product, {
       where: {
         id: product.id,
